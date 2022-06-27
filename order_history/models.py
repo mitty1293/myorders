@@ -36,6 +36,8 @@ class OrderHistory(models.Model):
     quantity = models.DecimalField(
         db_column="quantity",
         verbose_name="内容量",
+        max_digits=8,
+        decimal_places=3,
     )
 
     price = models.IntegerField(
