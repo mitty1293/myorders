@@ -11,6 +11,9 @@ Django = "^4.0.5"
 mysqlclient = "^2.1.1"
 
 [tool.poetry.dev-dependencies]
+pygraphviz = "^1.9"
+pydotplus = "^2.0.2"
+django-extensions = "^3.1.5"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
