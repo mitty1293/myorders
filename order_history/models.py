@@ -15,6 +15,20 @@ class Category(models.Model):
         return self.name
 
 
+class Unit(models.Model):
+    class Meta:
+        db_table = "unit"
+
+    name = models.CharField(
+        db_column="name",
+        verbose_name="単位",
+        max_length=32,
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class Vendor(models.Model):
     class Meta:
         db_table = "vendor"
@@ -35,20 +49,6 @@ class Vendor(models.Model):
         return self.name
 
 
-class Unit(models.Model):
-    class Meta:
-        db_table = "unit"
-
-    name = models.CharField(
-        db_column="name",
-        verbose_name="単位",
-        max_length=32,
-    )
-
-    def __str__(self):
-        return self.name
-
-
 def get_or_create_undefined_category():
     """
     Categoryモデルに'未分類'が存在しなければ作成、存在すれば'未分類'を返す
@@ -57,20 +57,20 @@ def get_or_create_undefined_category():
     return category
 
 
-def get_or_create_undefined_vendor():
-    """
-    Vendorモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
-    """
-    vendor, _ = Vendor.objects.get_or_create(id=1, name="未定義", location="未定義")
-    return vendor
-
-
 def get_or_create_undefined_unit():
     """
     Unitモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
     """
     unit, _ = Unit.objects.get_or_create(id=1, name="未定義")
     return unit
+
+
+def get_or_create_undefined_vendor():
+    """
+    Vendorモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
+    """
+    vendor, _ = Vendor.objects.get_or_create(id=1, name="未定義", location="未定義")
+    return vendor
 
 
 class Item(models.Model):
