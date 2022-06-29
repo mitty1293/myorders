@@ -2,37 +2,34 @@ from django.db import models
 
 
 class Category(models.Model):
-    class Meta:
-        db_table = "category"
-
     name = models.CharField(
         db_column="name",
         verbose_name="カテゴリ名",
         max_length=64,
     )
 
+    class Meta:
+        db_table = "category"
+
     def __str__(self):
         return self.name
 
 
 class Unit(models.Model):
-    class Meta:
-        db_table = "unit"
-
     name = models.CharField(
         db_column="name",
         verbose_name="単位",
         max_length=32,
     )
 
+    class Meta:
+        db_table = "unit"
+
     def __str__(self):
         return self.name
 
 
 class Vendor(models.Model):
-    class Meta:
-        db_table = "vendor"
-
     name = models.CharField(
         db_column="name",
         verbose_name="購入元名",
@@ -44,6 +41,9 @@ class Vendor(models.Model):
         verbose_name="場所",
         max_length=64,
     )
+
+    class Meta:
+        db_table = "vendor"
 
     def __str__(self):
         return self.name
@@ -74,9 +74,6 @@ def get_or_create_undefined_vendor():
 
 
 class Item(models.Model):
-    class Meta:
-        db_table = "item"
-
     name = models.CharField(
         db_column="name",
         verbose_name="商品名",
@@ -113,14 +110,14 @@ class Item(models.Model):
         blank=True,
     )
 
+    class Meta:
+        db_table = "item"
+
     def __str__(self):
         return self.name
 
 
 class OrderHistory(models.Model):
-    class Meta:
-        db_table = "order_history"
-
     created_at = models.DateTimeField(
         db_column="created_at",
         auto_now_add=True,
@@ -162,6 +159,9 @@ class OrderHistory(models.Model):
         on_delete=models.SET_DEFAULT,
         default=get_or_create_undefined_vendor,
     )
+
+    class Meta:
+        db_table = "order_history"
 
     def __str__(self):
         return str(self.id)
