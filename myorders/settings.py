@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "order_history.apps.OrderHistoryConfig",
     "accounts.apps.AccountsConfig",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
