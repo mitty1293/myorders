@@ -46,7 +46,7 @@ class Vendor(models.Model):
         db_table = "vendor"
 
     def __str__(self):
-        return self.name
+        return f"{self.name}:{self.location}"
 
 
 def get_or_create_undefined_category():
@@ -73,7 +73,7 @@ def get_or_create_undefined_vendor():
     return vendor
 
 
-class Item(models.Model):
+class Product(models.Model):
     name = models.CharField(
         db_column="name",
         verbose_name="商品名",
@@ -111,10 +111,10 @@ class Item(models.Model):
     )
 
     class Meta:
-        db_table = "item"
+        db_table = "product"
 
     def __str__(self):
-        return self.name
+        return f"{self.name}:{self.producing_area}:{self.manufacturer}"
 
 
 class OrderHistory(models.Model):
@@ -133,9 +133,9 @@ class OrderHistory(models.Model):
         verbose_name="購入日",
     )
 
-    item = models.ForeignKey(
-        Item,
-        db_column="item",
+    product = models.ForeignKey(
+        Product,
+        db_column="product",
         verbose_name="商品",
         on_delete=models.CASCADE,
     )
@@ -164,4 +164,4 @@ class OrderHistory(models.Model):
         db_table = "order_history"
 
     def __str__(self):
-        return str(self.id)
+        return f"{self.id}:{self.product.name}:{self.vendor.name}"
