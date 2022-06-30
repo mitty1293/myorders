@@ -11,6 +11,8 @@ class Detail(DetailView):
     template_name = "order_history/detail.html"
     model = OrderHistory
     # modelはOrderHistoryにしておいて、htmlでobject.product.name等で各モデルのカラムにアクセスできるか。
+    # そしてそれがforeignkeyの役割発揮できるところかも。
+    # このmodel内でも、product.nameとかできるかな？
 
 
 class Create(CreateView):
