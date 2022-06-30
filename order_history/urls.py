@@ -1,11 +1,18 @@
-from django.urls import path
+from django.urls import include, path
 
 from order_history.views import order
 
 urlpatterns = [
-    # path("", order.Index.as_view(), name="orderindex"),
-    # path("orderdetail/", order.Detail.as_view(), name="orderdetail"),
-    path("ordercreate/", order.Create.as_view(), name="ordercreate"),
-    # path("orderupdate/", order.Update.as_view(), name="orderupdate"),
-    # path("orderdelete/", order.Delete.as_view(), name="orderdelete"),
+    path(
+        "order/",
+        include(
+            [
+                # path("", order.Index.as_view(), name="orderindex"),
+                path("detail/<int:pk>", order.Detail.as_view(), name="orderdetail"),
+                path("create/", order.Create.as_view(), name="ordercreate"),
+                # path("update/<int:pk>", order.Update.as_view(), name="orderupdate"),
+                # path("delete/<int:pk>", order.Delete.as_view(), name="orderdelete"),
+            ]
+        ),
+    ),
 ]
