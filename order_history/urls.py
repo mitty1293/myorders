@@ -4,10 +4,10 @@ from order_history.views import order
 
 urlpatterns = [
     path(
-        "order/",
+        "<str:test>/",
         include(
             [
-                # path("", order.Index.as_view(), name="orderindex"),
+                path("", order.Index.as_view(), name="orderindex"),
                 path("detail/<int:pk>", order.Detail.as_view(), name="orderdetail"),
                 path("create/", order.Create.as_view(), name="ordercreate"),
                 # path("update/<int:pk>", order.Update.as_view(), name="orderupdate"),
