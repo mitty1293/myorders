@@ -4,7 +4,7 @@ from order_history.views import order
 
 urlpatterns = [
     path(
-        "<str:test>/",
+        "order/",
         include(
             [
                 path("", order.Index.as_view(), name="orderindex"),

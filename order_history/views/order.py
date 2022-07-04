@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
 from order_history.models import OrderHistory
 
@@ -11,12 +12,6 @@ class Index(ListView):
 class Detail(DetailView):
     template_name = "order_history/detail.html"
     model = OrderHistory
-    # modelはOrderHistoryにしておいて、htmlでobject.product.name等で各モデルのカラムにアクセスできるか。
-    # 上記のように、別モデルのインスタンスをフィールドの値として使えるのがforeignkeyの役割かも。
-    # https://teratail.com/questions/202236
-    # https://codor.co.jp/django/how-to-use-urlpattern
-    # https://noauto-nolife.com/post/django-args-kwargs-view-recycle/
-    # このmodel内でも、product.nameとかできるかな？
 
 
 class Create(CreateView):
@@ -29,9 +24,9 @@ class Create(CreateView):
         "price",
         "vendor",
     }
-    # 7/1
-    # listとdetailはhtmlで各モデルのカラムにアクセスで何とかなることはわかった。
-    # createやupdateが可能か調べること
+    success_url = reverse_lazy("orderindex")
+    # htmlには、modelで設定した「def __str__」の返り値が表示される
+    # ファンクションビューで受け取って、urlのパターンによって適切なクラスベースドビューに振り分ける？ができるか？
 
 
 class Update:

@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 
 {% block header %}
-登録画面です。
+<div>
+    Create
+</div>
 {% endblock header %}
 
 {% block content %}
-ああああ
+<form action="" method="post">{% csrf_token %}
+    {{ form.product }}
+    <input type="submit" value="create">
+</form>
+
 {% endblock content %}
