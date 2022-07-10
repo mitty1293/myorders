@@ -1,30 +1,27 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
-from order_history.models import OrderHistory
+from order_history.models import Vendor
 
 
 class Index(ListView):
-    template_name = "order_history/order/index.html"
-    model = OrderHistory
+    template_name = "order_history/vender/index.html"
+    model = Vendor
 
 
 class Detail(DetailView):
-    template_name = "order_history/order/detail.html"
-    model = OrderHistory
+    template_name = "order_history/vender/detail.html"
+    model = Vendor
 
 
 class Create(CreateView):
-    template_name = "order_history/order/create.html"
-    model = OrderHistory
+    template_name = "order_history/vender/create.html"
+    model = Vendor
     fields = {
-        "purchase_date",
-        "product",
-        "quantity",
-        "price",
-        "vendor",
+        "name",
+        "location",
     }
-    success_url = reverse_lazy("orderindex")
+    success_url = reverse_lazy("venderindex")
     # htmlには、modelで設定した「def __str__」の返り値が表示される
     # ファンクションビューで受け取って、urlのパターンによって適切なクラスベースドビューに振り分ける？ができるか？
 
