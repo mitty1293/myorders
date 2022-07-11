@@ -8,6 +8,12 @@ class Index(ListView):
     template_name = "order_history/category/index.html"
     model = Category
 
+    def get_context_data(self):
+        context = super().get_context_data()
+        context["page_title"] = self.model._meta.db_table
+        context["head_fields"] = self.model._meta.get_fields()
+        return context
+
 
 class Detail(DetailView):
     template_name = "order_history/category/detail.html"

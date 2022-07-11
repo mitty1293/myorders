@@ -1,19 +1,25 @@
 {% extends "base.html" %}
 
 {% block header %}
-<div>
-    Index
-</div>
+<h1>{{ page_title }}</h1>
 {% endblock header %}
 
 {% block content %}
-<ul>
-    {% for item in object_list %}
-    <li>purchase_date: {{ item.purchase_date }}</li>
-    <li>quantity: {{ item.quantity }}</li>
-    <li>product: {{ item.product.name }}</li>
-    {% endfor %}
-</ul>
-
-
+{% load custom_tags %}
+<table class="table table-striped">
+    <thead>
+        {% with object=object_list|first %}
+        <tr>
+            <th>{% get_verbose_name object "name" %}</th>
+        </tr>
+        {% endwith %}
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td>{{ object.name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock content %}

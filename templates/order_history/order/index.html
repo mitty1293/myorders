@@ -1,19 +1,32 @@
 {% extends "base.html" %}
 
 {% block header %}
-<div>
-    Index
-</div>
+<h1>{{ page_title }}</h1>
 {% endblock header %}
 
 {% block content %}
-<ul>
-    {% for item in object_list %}
-    <li>purchase_date: {{ item.purchase_date }}</li>
-    <li>quantity: {{ item.quantity }}</li>
-    <li>product: {{ item.product.name }}</li>
-    {% endfor %}
-</ul>
-
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>{{ page_title }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td>{{ object.purchase_date }}</td>
+            <td>{{ object.product.name }}</td>
+            <td>{{ object.quantity }}</td>
+            <td>{{ object.product.unit }}</td>
+            <td>{{ object.price }}</td>
+            <td>{{ object.vendor.name }}</td>
+            <td>{{ object.vendor.location }}</td>
+            <td>{{ object.product.manufacturer }}</td>
+            <td>{{ object.product.producing_area }}</td>
+            <td>{{ object }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock content %}
