@@ -8,11 +8,11 @@
 {% load custom_tags %}
 <table class="table table-striped">
     <thead>
-        {% with object=object_list|first %}
         <tr>
-            <th>{% get_verbose_name object "name" %}</th>
+            {% for head in heading_fields|slice:"2:" %}
+            <th>{{ head.verbose_name }}</th>
+            {% endfor %}
         </tr>
-        {% endwith %}
     </thead>
     <tbody>
         {% for object in object_list %}
