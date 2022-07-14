@@ -8,12 +8,15 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>{{ page_title }}</th>
+            {% for row in header_row %}
+            <th>{{ row.verbose_name }}</th>
+            {% endfor %}
         </tr>
     </thead>
     <tbody>
         {% for object in object_list %}
         <tr>
+            <td>{{ object.id }}</td>
             <td>{{ object.purchase_date }}</td>
             <td>{{ object.product.name }}</td>
             <td>{{ object.quantity }}</td>
@@ -23,7 +26,6 @@
             <td>{{ object.vendor.location }}</td>
             <td>{{ object.product.manufacturer }}</td>
             <td>{{ object.product.producing_area }}</td>
-            <td>{{ object }}</td>
         </tr>
         {% endfor %}
     </tbody>

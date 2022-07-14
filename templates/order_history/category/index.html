@@ -9,14 +9,15 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            {% for head in heading_fields|slice:"2:" %}
-            <th>{{ head.verbose_name }}</th>
+            {% for row in header_row %}
+            <th>{{ row.verbose_name }}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
         {% for object in object_list %}
         <tr>
+            <td>{{ object.id }}</td>
             <td>{{ object.name }}</td>
         </tr>
         {% endfor %}

@@ -10,8 +10,8 @@ class Index(ListView):
 
     def get_context_data(self):
         context = super().get_context_data()
-        context["page_title"] = self.model._meta.db_table
-        context["head_fields"] = self.model._meta.get_fields()
+        context["page_title"] = self.model.get_class_name()
+        context["header_row"] = self.model.get_model_fields()
         return context
 
 

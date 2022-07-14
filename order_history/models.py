@@ -1,7 +1,24 @@
 from django.db import models
 
 
-class Category(models.Model):
+class Common(models.Model):
+    class Meta:
+        abstract = True
+
+    @classmethod
+    def get_model_fields(cls):
+        meta_fields = cls._meta.get_fields()
+        filtered_fields = (
+            x for x in meta_fields if not isinstance(x, models.ManyToOneRel)
+        )
+        return filtered_fields
+
+    @classmethod
+    def get_class_name(cls):
+        return cls.__name__
+
+
+class Category(Common):
     name = models.CharField(
         db_column="name",
         verbose_name="カテゴリ名",
@@ -15,7 +32,7 @@ class Category(models.Model):
         return self.name
 
 
-class Unit(models.Model):
+class Unit(Common):
     name = models.CharField(
         db_column="name",
         verbose_name="単位",
@@ -29,7 +46,7 @@ class Unit(models.Model):
         return self.name
 
 
-class Vendor(models.Model):
+class Vendor(Common):
     name = models.CharField(
         db_column="name",
         verbose_name="購入元名",
@@ -73,7 +90,7 @@ def get_or_create_undefined_vendor():
     return vendor
 
 
-class Product(models.Model):
+class Product(Common):
     name = models.CharField(
         db_column="name",
         verbose_name="商品名",
@@ -117,7 +134,7 @@ class Product(models.Model):
         return f"{self.name}:{self.producing_area}:{self.manufacturer}"
 
 
-class OrderHistory(models.Model):
+class OrderHistory(Common):
     created_at = models.DateTimeField(
         db_column="created_at",
         auto_now_add=True,
