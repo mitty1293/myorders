@@ -8,7 +8,6 @@ urlpatterns = [
         include(
             [
                 path("", order.Index.as_view(), name="orderindex"),
-                path("detail/<int:pk>", order.Detail.as_view(), name="orderdetail"),
                 path("create/", order.Create.as_view(), name="ordercreate"),
                 # path("update/<int:pk>", order.Update.as_view(), name="orderupdate"),
                 # path("delete/<int:pk>", order.Delete.as_view(), name="orderdelete"),
@@ -56,12 +55,13 @@ urlpatterns = [
         include(
             [
                 path("", category.Index.as_view(), name="categoryindex"),
-                path(
-                    "detail/<int:pk>", category.Detail.as_view(), name="categorydetail"
-                ),
                 path("create/", category.Create.as_view(), name="categorycreate"),
-                # path("update/<int:pk>", category.Update.as_view(), name="categoryupdate"),
-                # path("delete/<int:pk>", category.Delete.as_view(), name="categorydelete"),
+                path(
+                    "update/<int:pk>", category.Update.as_view(), name="categoryupdate"
+                ),
+                path(
+                    "delete/<int:pk>", category.Delete.as_view(), name="categorydelete"
+                ),
             ]
         ),
     ),

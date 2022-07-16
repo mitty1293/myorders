@@ -1,17 +1,14 @@
 {% extends "base.html" %}
 
 {% block header %}
-<div>
-    Update
-</div>
+<h1>Update {{ page_title }}</h1>
 {% endblock header %}
 
 {% block content %}
-<ul>
-    <li>purchase_date: {{ object.purchase_date }}</li>
-    <li>quantity: {{ object.quantity }}</li>
-    <li>product: {{ object.product.name }}</li>
-</ul>
-
-
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="update">
+</form>
+<a href="{% url 'categorydelete' object.pk %}">削除</a>
+<a href="{% url 'categoryindex' %}">{{ page_title }}一覧に戻る</a>
 {% endblock content %}

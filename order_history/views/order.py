@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, ListView
 from order_history.models import OrderHistory
 
 
@@ -13,11 +13,6 @@ class Index(ListView):
         context["page_title"] = self.model.get_class_name()
         context["header_row"] = self.model.get_model_fields()
         return context
-
-
-class Detail(DetailView):
-    template_name = "order_history/order/detail.html"
-    model = OrderHistory
 
 
 class Create(CreateView):

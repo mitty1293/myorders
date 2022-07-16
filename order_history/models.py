@@ -8,10 +8,15 @@ class Common(models.Model):
     @classmethod
     def get_model_fields(cls):
         meta_fields = cls._meta.get_fields()
-        filtered_fields = (
+        reject_ManyToOneRel_fields = (
             x for x in meta_fields if not isinstance(x, models.ManyToOneRel)
         )
-        return filtered_fields
+        reject_unnecessary_fields = (
+            x
+            for x in reject_ManyToOneRel_fields
+            if x.name != "id" and x.name != "created_at" and x.name != "updated_at"
+        )
+        return reject_unnecessary_fields
 
     @classmethod
     def get_class_name(cls):
