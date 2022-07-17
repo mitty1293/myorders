@@ -1,19 +1,29 @@
 {% extends "base.html" %}
 
 {% block header %}
-<div>
-    Index
-</div>
+<h1>{{ page_title }}</h1>
 {% endblock header %}
 
 {% block content %}
-<ul>
-    {% for item in object_list %}
-    <li>purchase_date: {{ item.purchase_date }}</li>
-    <li>quantity: {{ item.quantity }}</li>
-    <li>product: {{ item.product.name }}</li>
-    {% endfor %}
-</ul>
-
-
+{% load custom_tags %}
+<a href="{% url 'vendorcreate' %}">{{ page_title }}を追加</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            {% for row in header_row %}
+            <th>{{ row.verbose_name }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td>
+                <a href="{% url 'vendorupdate' object.pk %}">{{ object.name }}</a>
+            </td>
+            <td>{{ object.location }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock content %}

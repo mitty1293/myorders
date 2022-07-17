@@ -135,8 +135,8 @@ class Product(Common):
     class Meta:
         db_table = "product"
 
-    def __str__(self):
-        return f"{self.name}:{self.producing_area}:{self.manufacturer}"
+    # def __str__(self):
+    #     return f"{self.name}:{self.producing_area}:{self.manufacturer}"
 
 
 class OrderHistory(Common):
