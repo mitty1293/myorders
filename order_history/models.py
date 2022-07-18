@@ -14,7 +14,7 @@ class Common(models.Model):
         reject_unnecessary_fields = (
             x
             for x in reject_ManyToOneRel_fields
-            if x.name != "id" and x.name != "created_at" and x.name != "updated_at"
+            if x.name != "created_at" and x.name != "updated_at"
         )
         return reject_unnecessary_fields
 

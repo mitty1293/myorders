@@ -17,10 +17,13 @@
     </thead>
     <tbody>
         {% for object in object_list %}
+        {% get_vars object as object_dict %}
         <tr>
+            {% for value in object_dict.values %}
             <td>
-                <a href="{% url 'productupdate' object.pk %}">{% get_type object %} {% get_vars object %}</a>
+                <a href="{% url 'productupdate' object.pk %}">{{ value }}</a>
             </td>
+            {% endfor %}
         </tr>
         {% endfor %}
     </tbody>
