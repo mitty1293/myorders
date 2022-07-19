@@ -7,7 +7,7 @@ from order_history.models import Product
 
 
 class Index(ListView):
-    template_name = "order_history/product/index.html"
+    template_name = "order_history/index.html"
     model = Product
     model_class_name_lower = model.get_class_name().lower()
 
@@ -21,7 +21,7 @@ class Index(ListView):
 
 
 class Create(CreateView):
-    template_name = "order_history/product/create.html"
+    template_name = "order_history/create.html"
     model = Product
     model_class_name_lower = model.get_class_name().lower()
     fields = [x.name for x in model.get_model_fields()]
@@ -35,7 +35,7 @@ class Create(CreateView):
 
 
 class Update(UpdateView):
-    template_name = "order_history/product/update.html"
+    template_name = "order_history/update.html"
     model = Product
     model_class_name_lower = model.get_class_name().lower()
     fields = [x.name for x in model.get_model_fields()]
@@ -50,7 +50,7 @@ class Update(UpdateView):
 
 
 class Delete(DeleteView):
-    template_name = "order_history/product/delete.html"
+    template_name = "order_history/delete.html"
     model = Product
     model_class_name_lower = model.get_class_name().lower()
     success_url = reverse_lazy(f"{model_class_name_lower}_index")

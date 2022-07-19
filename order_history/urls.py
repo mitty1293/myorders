@@ -33,10 +33,10 @@ urlpatterns = [
         "vendor/",
         include(
             [
-                path("", vendor.Index.as_view(), name="vendorindex"),
-                path("create/", vendor.Create.as_view(), name="vendorcreate"),
-                path("update/<int:pk>", vendor.Update.as_view(), name="vendorupdate"),
-                path("delete/<int:pk>", vendor.Delete.as_view(), name="vendordelete"),
+                path("", vendor.Index.as_view(), name="vendor_index"),
+                path("create/", vendor.Create.as_view(), name="vendor_create"),
+                path("update/<int:pk>", vendor.Update.as_view(), name="vendor_update"),
+                path("delete/<int:pk>", vendor.Delete.as_view(), name="vendor_delete"),
             ]
         ),
     ),
@@ -44,10 +44,10 @@ urlpatterns = [
         "unit/",
         include(
             [
-                path("", unit.Index.as_view(), name="unitindex"),
-                path("create/", unit.Create.as_view(), name="unitcreate"),
-                path("update/<int:pk>", unit.Update.as_view(), name="unitupdate"),
-                path("delete/<int:pk>", unit.Delete.as_view(), name="unitdelete"),
+                path("", unit.Index.as_view(), name="unit_index"),
+                path("create/", unit.Create.as_view(), name="unit_create"),
+                path("update/<int:pk>", unit.Update.as_view(), name="unit_update"),
+                path("delete/<int:pk>", unit.Delete.as_view(), name="unit_delete"),
             ]
         ),
     ),
@@ -55,13 +55,13 @@ urlpatterns = [
         "category/",
         include(
             [
-                path("", category.Index.as_view(), name="categoryindex"),
-                path("create/", category.Create.as_view(), name="categorycreate"),
+                path("", category.Index.as_view(), name="category_index"),
+                path("create/", category.Create.as_view(), name="category_create"),
                 path(
-                    "update/<int:pk>", category.Update.as_view(), name="categoryupdate"
+                    "update/<int:pk>", category.Update.as_view(), name="category_update"
                 ),
                 path(
-                    "delete/<int:pk>", category.Delete.as_view(), name="categorydelete"
+                    "delete/<int:pk>", category.Delete.as_view(), name="category_delete"
                 ),
             ]
         ),
