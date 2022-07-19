@@ -6,7 +6,7 @@
 
 {% block content %}
 {% load custom_tags %}
-<a href="{% url 'productcreate' %}">{{ page_title }}を追加</a>
+<a href="{% url urlname_create %}">{{ page_title }}を追加</a>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -21,7 +21,7 @@
         <tr>
             {% for value in object_dict.values %}
             <td>
-                <a href="{% url 'productupdate' object.pk %}">{{ value }}</a>
+                <a href="{% url urlname_update object.pk %}">{{ value }}</a>
             </td>
             {% endfor %}
         </tr>

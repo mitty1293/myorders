@@ -18,10 +18,14 @@ urlpatterns = [
         "product/",
         include(
             [
-                path("", product.Index.as_view(), name="productindex"),
-                path("create/", product.Create.as_view(), name="productcreate"),
-                path("update/<int:pk>", product.Update.as_view(), name="productupdate"),
-                path("delete/<int:pk>", product.Delete.as_view(), name="productdelete"),
+                path("", product.Index.as_view(), name="product_index"),
+                path("create/", product.Create.as_view(), name="product_create"),
+                path(
+                    "update/<int:pk>", product.Update.as_view(), name="product_update"
+                ),
+                path(
+                    "delete/<int:pk>", product.Delete.as_view(), name="product_delete"
+                ),
             ]
         ),
     ),
