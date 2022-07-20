@@ -7,6 +7,7 @@
 {% endblock header %}
 
 {% block content %}
+{% load custom_tags %}
 <ul>
     <li>purchase_date: {{ object.purchase_date }}</li>
     <li>quantity: {{ object.quantity }}</li>

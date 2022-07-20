@@ -19,10 +19,12 @@
         {% for object in object_list %}
         {% get_vars object as object_dict %}
         <tr>
-            {% for value in object_dict.values %}
+            {% for key, value in object_dict.items %}
+            {% if key != "_state" %}
             <td>
                 <a href="{% url urlname_update object.pk %}">{{ value }}</a>
             </td>
+            {% endif %}
             {% endfor %}
         </tr>
         {% endfor %}

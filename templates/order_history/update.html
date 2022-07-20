@@ -5,8 +5,20 @@
 {% endblock header %}
 
 {% block content %}
+{% load custom_tags %}
 <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    {% get_vars form %}<br>
+    {{ form.category.name }}<br>
+    {% for field in form %}
+    <div>
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.widget_type == "select" %}
+        <a href="{% url field.name|addstr:'_update' field.value %}">更新</a>
+        <a href="{% url field.name|addstr:'_create' %}">追加</a>
+        {% endif %}
+    </div>
+    {% endfor %}
     <input type="submit" value="update">
 </form>
 <a href="{% url urlname_delete object.pk %}">削除</a>

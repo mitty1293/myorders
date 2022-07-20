@@ -5,6 +5,7 @@
 {% endblock header %}
 
 {% block content %}
+{% load custom_tags %}
 <form action="" method="post">{% csrf_token %}
     {{ object.name }} を削除しますか？
     <input type="submit" value="delete">

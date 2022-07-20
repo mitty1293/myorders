@@ -1,11 +1,20 @@
 from django import template
-from django.db import models
+from django.template.defaultfilters import stringfilter
 
 register = template.Library()
 
 
 @register.simple_tag
+def get_type(object):
+    return type(object)
+
+
+@register.simple_tag
 def get_vars(object):
-    object_vars = vars(object)
-    del object_vars["_state"]
-    return object_vars
+    return vars(object)
+
+
+@register.filter
+@stringfilter
+def addstr(value, arg):
+    return value + arg
