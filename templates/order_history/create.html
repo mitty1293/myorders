@@ -7,7 +7,16 @@
 {% block content %}
 {% load custom_tags %}
 <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+    <div>
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.widget_type == "select" %}
+        <a href="{% url field.name|addstr:'_update' field.value %}">更新</a>
+        <a href="{% url field.name|addstr:'_create' %}">追加</a>
+        {% endif %}
+    </div>
+    {% endfor %}
     <input type="submit" value="create">
 </form>
 <a href="{% url urlname_index %}">{{ page_title }}一覧に戻る</a>
