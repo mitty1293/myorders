@@ -34,6 +34,17 @@ class Create(CreateView):
         return context
 
 
+class PopupCreate(Create):
+    def form_valid(self, form):
+        unit = form.save()
+        context = {
+            "object_name": str(unit),
+            "object_pk": unit.pk,
+            "function_name": "add_unit",
+        }
+        return render(self.request, "order_history/close.html", context)
+
+
 class Update(UpdateView):
     template_name = "order_history/update.html"
     model = Unit

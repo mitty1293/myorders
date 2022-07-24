@@ -45,6 +45,11 @@ urlpatterns = [
         include(
             [
                 path("", unit.Index.as_view(), name="unit_index"),
+                path(
+                    "popup/create/",
+                    unit.PopupCreate.as_view(),
+                    name="unit_popup_create",
+                ),
                 path("create/", unit.Create.as_view(), name="unit_create"),
                 path("update/<int:pk>", unit.Update.as_view(), name="unit_update"),
                 path("delete/<int:pk>", unit.Delete.as_view(), name="unit_delete"),
@@ -56,6 +61,11 @@ urlpatterns = [
         include(
             [
                 path("", category.Index.as_view(), name="category_index"),
+                path(
+                    "popup/create/",
+                    category.PopupCreate.as_view(),
+                    name="category_popup_create",
+                ),
                 path("create/", category.Create.as_view(), name="category_create"),
                 path(
                     "update/<int:pk>", category.Update.as_view(), name="category_update"

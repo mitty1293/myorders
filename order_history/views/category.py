@@ -34,6 +34,17 @@ class Create(CreateView):
         return context
 
 
+class PopupCreate(Create):
+    def form_valid(self, form):
+        category = form.save()
+        context = {
+            "object_name": str(category),
+            "object_pk": category.pk,
+            "function_name": "add_category",
+        }
+        return render(self.request, "order_history/close.html", context)
+
+
 class Update(UpdateView):
     template_name = "order_history/update.html"
     model = Category
