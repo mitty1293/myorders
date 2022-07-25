@@ -60,6 +60,17 @@ class Update(UpdateView):
         return context
 
 
+class PopupUpdate(Update):
+    def form_valid(self, form):
+        category = form.save()
+        context = {
+            "object_name": str(category),
+            "object_pk": category.pk,
+            "function_name": "add_category",
+        }
+        return render(self.request, "order_history/close.html", context)
+
+
 class Delete(DeleteView):
     template_name = "order_history/delete.html"
     model = Category

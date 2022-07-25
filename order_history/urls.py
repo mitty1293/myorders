@@ -51,6 +51,11 @@ urlpatterns = [
                     name="unit_popup_create",
                 ),
                 path("create/", unit.Create.as_view(), name="unit_create"),
+                path(
+                    "popup/update/<int:pk>",
+                    unit.PopupUpdate.as_view(),
+                    name="unit_popup_update",
+                ),
                 path("update/<int:pk>", unit.Update.as_view(), name="unit_update"),
                 path("delete/<int:pk>", unit.Delete.as_view(), name="unit_delete"),
             ]
@@ -67,6 +72,11 @@ urlpatterns = [
                     name="category_popup_create",
                 ),
                 path("create/", category.Create.as_view(), name="category_create"),
+                path(
+                    "popup/update/<int:pk>",
+                    category.PopupUpdate.as_view(),
+                    name="category_popup_update",
+                ),
                 path(
                     "update/<int:pk>", category.Update.as_view(), name="category_update"
                 ),

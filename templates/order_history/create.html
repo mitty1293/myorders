@@ -12,7 +12,8 @@
         {{ field.label_tag }}
         {{ field }}
         {% if field.widget_type == "select" %}
-        <a class="class_update" href="{% url field.name|addstr:'_update' field.value %}">更新</a>
+        <a class="class_update" href="javascript:void(0);"
+            onclick="window.open('{% url field.name|addstr:'_popup_update' field.value %}', 'subwin', 'width=500, height=500');">更新</a>
         <a class="class_create" href="javascript:void(0);"
             onclick="window.open('{% url field.name|addstr:'_popup_create' %}', 'subwin', 'width=500, height=500');">追加</a>
         {% endif %}
