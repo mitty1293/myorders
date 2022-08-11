@@ -6,7 +6,6 @@
 
 {% block content %}
 {% load custom_tags %}
-<a href="{% url urlname_create %}">{{ page_title }}を追加</a>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -17,17 +16,19 @@
     </thead>
     <tbody>
         {% for object in object_list %}
-        {% get_vars object as object_dict %}
         <tr>
-            {% for key, value in object_dict.items %}
-            {% if key != "_state" %}
-            <td>
-                <a href="{% url urlname_update object.pk %}">{{ value }}</a>
-            </td>
-            {% endif %}
-            {% endfor %}
+            <td>{{ object.purchase_date }}</td>
+            <td>{{ object.product.name }}</td>
+            <td>{{ object.quantity }}</td>
+            <td>{{ object.product.unit }}</td>
+            <td>{{ object.price }}</td>
+            <td>{{ object.vendor.name }}</td>
+            <td>{{ object.vendor.location }}</td>
+            <td>{{ object.product.manufacturer }}</td>
+            <td>{{ object.product.producing_area }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
 {% endblock content %}

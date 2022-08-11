@@ -1,17 +1,29 @@
 {% extends "base.html" %}
 
 {% block header %}
-<div>
-    Update
-</div>
+<h1>Update {{ page_title }}</h1>
 {% endblock header %}
-
+{% load static %}
+{% load custom_tags %}
 {% block content %}
-<ul>
-    <li>purchase_date: {{ object.purchase_date }}</li>
-    <li>quantity: {{ object.quantity }}</li>
-    <li>product: {{ object.product.name }}</li>
-</ul>
-
-
+<form action="" method="post">{% csrf_token %}
+    {% for field in form %}
+    <div>
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.widget_type == "select" %}
+        <a class="class_update" href="{% url field.name|addstr:'_update' field.value %}">更新</a>
+        <a class="class_create" href="javascript:void(0);"
+            onclick="window.open('{% url field.name|addstr:'_popup_create' %}', 'subwin', 'width=500, height=500');">追加</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <input type="submit" value="update">
+</form>
+<a href="{% url urlname_delete object.pk %}">削除</a>
+<a href="{% url urlname_index %}">{{ page_title }}一覧に戻る</a>
 {% endblock content %}
+{% block javascript %}
+<script src="{% static 'order_history/js/change_url.js' %}"></script>
+<script src="{% static 'order_history/js/popup.js' %}"></script>
+{% endblock javascript %}
