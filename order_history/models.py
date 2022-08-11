@@ -11,12 +11,7 @@ class Common(models.Model):
         reject_ManyToOneRel_fields = (
             x for x in meta_fields if not isinstance(x, models.ManyToOneRel)
         )
-        reject_unnecessary_fields = (
-            x
-            for x in reject_ManyToOneRel_fields
-            if x.name != "created_at" and x.name != "updated_at"
-        )
-        return reject_unnecessary_fields
+        return reject_ManyToOneRel_fields
 
     @classmethod
     def get_class_name(cls):
@@ -140,16 +135,6 @@ class Product(Common):
 
 
 class OrderHistory(Common):
-    created_at = models.DateTimeField(
-        db_column="created_at",
-        auto_now_add=True,
-    )
-
-    updated_at = models.DateTimeField(
-        db_column="updated_at",
-        auto_now=True,
-    )
-
     purchase_date = models.DateField(
         db_column="purchase_date",
         verbose_name="購入日",
