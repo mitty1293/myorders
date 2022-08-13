@@ -66,6 +66,36 @@ class Vendor(Common):
         return f"{self.name}:{self.location}"
 
 
+class Manufacturer(Common):
+    name = models.CharField(
+        db_column="name",
+        verbose_name="製造者",
+        max_length=64,
+        blank=True,
+    )
+
+    class Meta:
+        db_table = "manufacturer"
+
+    def __str__(self):
+        return self.name
+
+
+class ProducingArea(Common):
+    name = models.CharField(
+        db_column="name",
+        verbose_name="生産地",
+        max_length=64,
+        blank=True,
+    )
+
+    class Meta:
+        db_table = "producing_area"
+
+    def __str__(self):
+        return self.name
+
+
 def get_or_create_undefined_category():
     """
     Categoryモデルに'未分類'が存在しなければ作成、存在すれば'未分類'を返す
@@ -88,6 +118,22 @@ def get_or_create_undefined_vendor():
     """
     vendor, _ = Vendor.objects.get_or_create(id=1, name="未定義", location="未定義")
     return vendor
+
+
+def get_or_create_undefined_manufacturer():
+    """
+    Manufacturerモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
+    """
+    manufacturer, _ = Manufacturer.objects.get_or_create(id=1, name="未定義")
+    return manufacturer
+
+
+def get_or_create_undefined_producing_area():
+    """
+    ProducingAreaモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
+    """
+    producing_area, _ = ProducingArea.objects.get_or_create(id=1, name="未定義")
+    return producing_area
 
 
 class Product(Common):
@@ -113,18 +159,20 @@ class Product(Common):
         default=get_or_create_undefined_unit,
     )
 
-    manufacturer = models.CharField(
+    manufacturer = models.ForeignKey(
+        Manufacturer,
         db_column="manufacturer",
         verbose_name="製造者",
-        max_length=64,
-        blank=True,
+        on_delete=models.SET_DEFAULT,
+        default=get_or_create_undefined_manufacturer,
     )
 
-    producing_area = models.CharField(
+    producing_area = models.ForeignKey(
+        ProducingArea,
         db_column="producing_area",
         verbose_name="生産地",
-        max_length=64,
-        blank=True,
+        on_delete=models.SET_DEFAULT,
+        default=get_or_create_undefined_producing_area,
     )
 
     class Meta:

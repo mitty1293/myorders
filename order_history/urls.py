@@ -1,6 +1,14 @@
 from django.urls import include, path
 
-from order_history.views import category, order, product, unit, vendor
+from order_history.views import (
+    category,
+    manufacturer,
+    order,
+    producing_area,
+    product,
+    unit,
+    vendor,
+)
 
 urlpatterns = [
     path(
@@ -82,6 +90,70 @@ urlpatterns = [
                 ),
                 path(
                     "delete/<int:pk>", category.Delete.as_view(), name="category_delete"
+                ),
+            ]
+        ),
+    ),
+    path(
+        "manufacturer/",
+        include(
+            [
+                path("", manufacturer.Index.as_view(), name="manufacturer_index"),
+                path(
+                    "popup/create/",
+                    manufacturer.PopupCreate.as_view(),
+                    name="manufacturer_popup_create",
+                ),
+                path(
+                    "create/", manufacturer.Create.as_view(), name="manufacturer_create"
+                ),
+                path(
+                    "popup/update/<int:pk>",
+                    manufacturer.PopupUpdate.as_view(),
+                    name="manufacturer_popup_update",
+                ),
+                path(
+                    "update/<int:pk>",
+                    manufacturer.Update.as_view(),
+                    name="manufacturer_update",
+                ),
+                path(
+                    "delete/<int:pk>",
+                    manufacturer.Delete.as_view(),
+                    name="manufacturer_delete",
+                ),
+            ]
+        ),
+    ),
+    path(
+        "producing_area/",
+        include(
+            [
+                path("", producing_area.Index.as_view(), name="producing_area_index"),
+                path(
+                    "popup/create/",
+                    producing_area.PopupCreate.as_view(),
+                    name="producing_area_popup_create",
+                ),
+                path(
+                    "create/",
+                    producing_area.Create.as_view(),
+                    name="producing_area_create",
+                ),
+                path(
+                    "popup/update/<int:pk>",
+                    producing_area.PopupUpdate.as_view(),
+                    name="producing_area_popup_update",
+                ),
+                path(
+                    "update/<int:pk>",
+                    producing_area.Update.as_view(),
+                    name="producing_area_update",
+                ),
+                path(
+                    "delete/<int:pk>",
+                    producing_area.Delete.as_view(),
+                    name="producing_area_delete",
                 ),
             ]
         ),
