@@ -36,11 +36,12 @@ class Create(CreateView):
 
 class PopupCreate(Create):
     def form_valid(self, form):
-        producing_area = form.save()
+        producingarea = form.save()
         context = {
-            "object_name": str(producing_area),
-            "object_pk": producing_area.pk,
-            "function_name": "add_producing_area",
+            "object_model": "producingarea",
+            "object_name": str(producingarea),
+            "object_pk": producingarea.pk,
+            "function_name": "add_select_option",
         }
         return render(self.request, "order_history/close.html", context)
 
@@ -62,11 +63,12 @@ class Update(UpdateView):
 
 class PopupUpdate(Update):
     def form_valid(self, form):
-        producing_area = form.save()
+        producingarea = form.save()
         context = {
-            "object_name": str(producing_area),
-            "object_pk": producing_area.pk,
-            "function_name": "add_producing_area",
+            "object_model": "producingarea",
+            "object_name": str(producingarea),
+            "object_pk": producingarea.pk,
+            "function_name": "update_select_option",
         }
         return render(self.request, "order_history/close.html", context)
 

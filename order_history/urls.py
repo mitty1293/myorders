@@ -1,14 +1,7 @@
 from django.urls import include, path
 
-from order_history.views import (
-    category,
-    manufacturer,
-    order,
-    producing_area,
-    product,
-    unit,
-    vendor,
-)
+from order_history.views import (category, manufacturer, order, producingarea,
+                                 product, unit, vendor)
 
 urlpatterns = [
     path(
@@ -126,34 +119,34 @@ urlpatterns = [
         ),
     ),
     path(
-        "producing_area/",
+        "producingarea/",
         include(
             [
-                path("", producing_area.Index.as_view(), name="producing_area_index"),
+                path("", producingarea.Index.as_view(), name="producingarea_index"),
                 path(
                     "popup/create/",
-                    producing_area.PopupCreate.as_view(),
-                    name="producing_area_popup_create",
+                    producingarea.PopupCreate.as_view(),
+                    name="producingarea_popup_create",
                 ),
                 path(
                     "create/",
-                    producing_area.Create.as_view(),
-                    name="producing_area_create",
+                    producingarea.Create.as_view(),
+                    name="producingarea_create",
                 ),
                 path(
                     "popup/update/<int:pk>",
-                    producing_area.PopupUpdate.as_view(),
-                    name="producing_area_popup_update",
+                    producingarea.PopupUpdate.as_view(),
+                    name="producingarea_popup_update",
                 ),
                 path(
                     "update/<int:pk>",
-                    producing_area.Update.as_view(),
-                    name="producing_area_update",
+                    producingarea.Update.as_view(),
+                    name="producingarea_update",
                 ),
                 path(
                     "delete/<int:pk>",
-                    producing_area.Delete.as_view(),
-                    name="producing_area_delete",
+                    producingarea.Delete.as_view(),
+                    name="producingarea_delete",
                 ),
             ]
         ),

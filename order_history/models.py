@@ -90,7 +90,7 @@ class ProducingArea(Common):
     )
 
     class Meta:
-        db_table = "producing_area"
+        db_table = "producingarea"
 
     def __str__(self):
         return self.name
@@ -128,12 +128,12 @@ def get_or_create_undefined_manufacturer():
     return manufacturer
 
 
-def get_or_create_undefined_producing_area():
+def get_or_create_undefined_producingarea():
     """
     ProducingAreaモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
     """
-    producing_area, _ = ProducingArea.objects.get_or_create(id=1, name="未定義")
-    return producing_area
+    producingarea, _ = ProducingArea.objects.get_or_create(id=1, name="未定義")
+    return producingarea
 
 
 class Product(Common):
@@ -167,19 +167,19 @@ class Product(Common):
         default=get_or_create_undefined_manufacturer,
     )
 
-    producing_area = models.ForeignKey(
+    producingarea = models.ForeignKey(
         ProducingArea,
-        db_column="producing_area",
+        db_column="producingarea",
         verbose_name="生産地",
         on_delete=models.SET_DEFAULT,
-        default=get_or_create_undefined_producing_area,
+        default=get_or_create_undefined_producingarea,
     )
 
     class Meta:
         db_table = "product"
 
     # def __str__(self):
-    #     return f"{self.name}:{self.producing_area}:{self.manufacturer}"
+    #     return f"{self.name}:{self.producingarea}:{self.manufacturer}"
 
 
 class OrderHistory(Common):

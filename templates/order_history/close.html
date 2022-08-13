@@ -5,9 +5,10 @@
 
 <body>
     <script type="text/javascript">
+        var object_model = '{{ object_model }}';
         var object_name = '{{ object_name }}';
         var object_pk = '{{ object_pk }}';
-        window.opener.{{ function_name }}(object_name, object_pk);
+        window.opener.{{ function_name }}(object_model, object_name, object_pk);
         window.close();
     </script>
 </body>

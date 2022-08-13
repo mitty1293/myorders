@@ -38,9 +38,10 @@ class PopupCreate(Create):
     def form_valid(self, form):
         category = form.save()
         context = {
+            "object_model": "category",
             "object_name": str(category),
             "object_pk": category.pk,
-            "function_name": "add_category",
+            "function_name": "add_select_option",
         }
         return render(self.request, "order_history/close.html", context)
 
@@ -64,9 +65,10 @@ class PopupUpdate(Update):
     def form_valid(self, form):
         category = form.save()
         context = {
+            "object_model": "category",
             "object_name": str(category),
             "object_pk": category.pk,
-            "function_name": "add_category",
+            "function_name": "update_select_option",
         }
         return render(self.request, "order_history/close.html", context)
 
