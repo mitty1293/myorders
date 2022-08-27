@@ -1,7 +1,14 @@
 from django.urls import include, path
 
-from order_history.views import (category, manufacturer, order, producingarea,
-                                 product, unit, vendor)
+from order_history.views import (
+    category,
+    manufacturer,
+    order,
+    producingarea,
+    product,
+    unit,
+    vendor,
+)
 
 urlpatterns = [
     path(
@@ -20,9 +27,24 @@ urlpatterns = [
         include(
             [
                 path("", product.Index.as_view(), name="product_index"),
+                path(
+                    "popup/create/",
+                    product.PopupCreate.as_view(),
+                    name="product_popup_create",
+                ),
                 path("create/", product.Create.as_view(), name="product_create"),
                 path(
+                    "popup/update/<int:pk>",
+                    product.PopupUpdate.as_view(),
+                    name="product_popup_update",
+                ),
+                path(
                     "update/<int:pk>", product.Update.as_view(), name="product_update"
+                ),
+                path(
+                    "popup/delete/<int:pk>",
+                    product.PopupDelete.as_view(),
+                    name="product_popup_delete",
                 ),
                 path(
                     "delete/<int:pk>", product.Delete.as_view(), name="product_delete"
@@ -35,8 +57,23 @@ urlpatterns = [
         include(
             [
                 path("", vendor.Index.as_view(), name="vendor_index"),
+                path(
+                    "popup/create/",
+                    vendor.PopupCreate.as_view(),
+                    name="vendor_popup_create",
+                ),
                 path("create/", vendor.Create.as_view(), name="vendor_create"),
+                path(
+                    "popup/update/<int:pk>",
+                    vendor.PopupUpdate.as_view(),
+                    name="vendor_popup_update",
+                ),
                 path("update/<int:pk>", vendor.Update.as_view(), name="vendor_update"),
+                path(
+                    "popup/delete/<int:pk>",
+                    vendor.PopupDelete.as_view(),
+                    name="vendor_popup_delete",
+                ),
                 path("delete/<int:pk>", vendor.Delete.as_view(), name="vendor_delete"),
             ]
         ),
@@ -58,6 +95,11 @@ urlpatterns = [
                     name="unit_popup_update",
                 ),
                 path("update/<int:pk>", unit.Update.as_view(), name="unit_update"),
+                path(
+                    "popup/delete/<int:pk>",
+                    unit.PopupDelete.as_view(),
+                    name="unit_popup_delete",
+                ),
                 path("delete/<int:pk>", unit.Delete.as_view(), name="unit_delete"),
             ]
         ),
@@ -80,6 +122,11 @@ urlpatterns = [
                 ),
                 path(
                     "update/<int:pk>", category.Update.as_view(), name="category_update"
+                ),
+                path(
+                    "popup/delete/<int:pk>",
+                    category.PopupDelete.as_view(),
+                    name="category_popup_delete",
                 ),
                 path(
                     "delete/<int:pk>", category.Delete.as_view(), name="category_delete"
@@ -109,6 +156,11 @@ urlpatterns = [
                     "update/<int:pk>",
                     manufacturer.Update.as_view(),
                     name="manufacturer_update",
+                ),
+                path(
+                    "popup/delete/<int:pk>",
+                    manufacturer.PopupDelete.as_view(),
+                    name="manufacturer_popup_delete",
                 ),
                 path(
                     "delete/<int:pk>",
@@ -142,6 +194,11 @@ urlpatterns = [
                     "update/<int:pk>",
                     producingarea.Update.as_view(),
                     name="producingarea_update",
+                ),
+                path(
+                    "popup/delete/<int:pk>",
+                    producingarea.PopupDelete.as_view(),
+                    name="producingarea_popup_delete",
                 ),
                 path(
                     "delete/<int:pk>",

@@ -41,7 +41,7 @@ class PopupCreate(Create):
             "object_model": "manufacturer",
             "object_name": str(manufacturer),
             "object_pk": manufacturer.pk,
-            "function_name": "add_select_option",
+            "function_name": "create_select_option",
         }
         return render(self.request, "order_history/close.html", context)
 
@@ -84,3 +84,15 @@ class Delete(DeleteView):
         context["page_title"] = self.model.get_class_name()
         context["urlname_index"] = f"{self.model_class_name_lower}_index"
         return context
+
+
+class PopupDelete(Delete):
+    def form_valid(self, form):
+        manufacturer = form.save()
+        context = {
+            "object_model": "manufacturer",
+            "object_name": str(manufacturer),
+            "object_pk": manufacturer.pk,
+            "function_name": "delete_select_option",
+        }
+        return render(self.request, "order_history/close.html", context)

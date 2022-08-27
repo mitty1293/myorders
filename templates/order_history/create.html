@@ -12,10 +12,9 @@
         {{ field.label_tag }}
         {{ field }}
         {% if field.widget_type == "select" %}
-        <a class="class_update" href="javascript:void(0);"
-            onclick="window.open('{% url field.name|addstr:'_popup_update' field.value %}', 'subwin', 'width=500, height=500');">更新</a>
-        <a class="class_create" href="javascript:void(0);"
-            onclick="window.open('{% url field.name|addstr:'_popup_create' %}', 'subwin', 'width=500, height=500');">追加</a>
+        <a href="{% url field.name|addstr:'_popup_update' field.value %}" class="bi-pencil-square popup_btn update_btn"></a>
+        <a href="{% url field.name|addstr:'_popup_create' %}" class="bi-plus-square popup_btn create_btn"></a>
+        <a href="{% url field.name|addstr:'_popup_delete' field.value %}" class="bi-x-square"></a>
         {% endif %}
     </div>
     {% endfor %}
@@ -24,6 +23,6 @@
 <a href="{% url urlname_index %}">{{ page_title }}一覧に戻る</a>
 {% endblock content %}
 {% block javascript %}
-<!-- <script src="{% static 'order_history/js/change_url.js' %}"></script> -->
+<script src="{% static 'order_history/js/change_url.js' %}"></script>
 <script src="{% static 'order_history/js/popup.js' %}"></script>
 {% endblock javascript %}
