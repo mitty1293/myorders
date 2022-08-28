@@ -88,7 +88,8 @@ class Delete(DeleteView):
 
 class PopupDelete(Delete):
     def form_valid(self, form):
-        category = form.save()
+        category = self.get_object()
+        category.delete()
         context = {
             "object_model": "category",
             "object_name": str(category),
