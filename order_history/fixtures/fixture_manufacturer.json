@@ -1,0 +1,1 @@
+[{"model": "order_history.manufacturer", "pk": 1, "fields": {"name": "未定義"}}, {"model": "order_history.manufacturer", "pk": 2, "fields": {"name": "森永製菓"}}, {"model": "order_history.manufacturer", "pk": 3, "fields": {"name": "カルビー"}}, {"model": "order_history.manufacturer", "pk": 4, "fields": {"name": "サッポロビール"}}]

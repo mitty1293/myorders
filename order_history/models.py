@@ -63,7 +63,7 @@ class Vendor(Common):
         db_table = "vendor"
 
     def __str__(self):
-        return f"{self.name}:{self.location}"
+        return f"{self.__class__.__name__}({self.name}, {self.location})"
 
 
 class Manufacturer(Common):
@@ -178,8 +178,8 @@ class Product(Common):
     class Meta:
         db_table = "product"
 
-    # def __str__(self):
-    #     return f"{self.name}:{self.producingarea}:{self.manufacturer}"
+    def __str__(self):
+        return f"{self.__class__.__name__}({self.name}, {self.category}, {self.unit}, {self.manufacturer}, {self.producingarea})"
 
 
 class OrderHistory(Common):
@@ -219,4 +219,4 @@ class OrderHistory(Common):
         db_table = "order_history"
 
     def __str__(self):
-        return f"{self.id}:{self.product.name}:{self.vendor.name}"
+        return f"{self.__class__.__name__}({self.purchase_date}, {self.product.name}, {self.quantity}, {self.price}, {self.vendor.name})"
