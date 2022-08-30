@@ -1,0 +1,1 @@
+[{"model": "order_history.unit", "pk": 1, "fields": {"name": "未定義"}}, {"model": "order_history.unit", "pk": 2, "fields": {"name": "g"}}, {"model": "order_history.unit", "pk": 3, "fields": {"name": "ml"}}, {"model": "order_history.unit", "pk": 4, "fields": {"name": "個"}}, {"model": "order_history.unit", "pk": 5, "fields": {"name": "本"}}]
