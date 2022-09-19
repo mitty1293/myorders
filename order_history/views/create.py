@@ -22,5 +22,11 @@ class Create(CreateView):
         "vendor": Vendor,
     }
 
-    def test(self):
-        pass
+    def get(self, request, *args, **kwargs):
+        self.model = self.model_matrix.get(self.kwargs.get("name"))
+        return super().get(request, *args, **kwargs)
+
+    # getでもpostでもget_form -> get_form_class でmodelを定義しているが、
+    # get_form も get_form_class もrequestを引数に持たないので
+    # get と post を両方オーバーライドして
+    # self.model = self.model_matrix.get(self.kwargs.get("name")) とするのが良いと思う。
