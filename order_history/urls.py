@@ -2,6 +2,7 @@ from django.urls import include, path
 
 from order_history.views import (
     category,
+    index,
     manufacturer,
     order,
     producingarea,
@@ -11,6 +12,7 @@ from order_history.views import (
 )
 
 urlpatterns = [
+    path("<str:name>/", index.Index.as_view(), name="category_index"),
     path(
         "order/",
         include(
@@ -108,7 +110,7 @@ urlpatterns = [
         "category/",
         include(
             [
-                path("", category.Index.as_view(), name="category_index"),
+                # path("", category.Index.as_view(), name="category_index"),
                 path(
                     "popup/create/",
                     category.PopupCreate.as_view(),
