@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
 from django.views.generic import ListView
 from order_history.models import (
     Category,
@@ -13,7 +11,7 @@ from order_history.models import (
 
 class Index(ListView):
     template_name = "order_history/index.html"
-    matrix = {
+    model_matrix = {
         "category": Category,
         "manufacturer": Manufacturer,
         "producingarea": ProducingArea,
@@ -23,7 +21,7 @@ class Index(ListView):
     }
 
     def get(self, request, *args, **kwargs):
-        self.model = self.matrix.get(self.kwargs.get("name"))
+        self.model = self.model_matrix.get(self.kwargs.get("name"))
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
