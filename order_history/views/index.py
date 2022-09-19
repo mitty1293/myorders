@@ -1,13 +1,25 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, View
-from order_history.models import Category
+from django.views.generic import ListView
+from order_history.models import (
+    Category,
+    Manufacturer,
+    ProducingArea,
+    Product,
+    Unit,
+    Vendor,
+)
 
 
 class Index(ListView):
     template_name = "order_history/index.html"
     matrix = {
         "category": Category,
+        "manufacturer": Manufacturer,
+        "producingarea": ProducingArea,
+        "product": Product,
+        "unit": Unit,
+        "vendor": Vendor,
     }
 
     def get(self, request, *args, **kwargs):

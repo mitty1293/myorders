@@ -12,7 +12,7 @@ from order_history.views import (
 )
 
 urlpatterns = [
-    path("<str:name>/", index.Index.as_view(), name="category_index"),
+    # path("<str:name>/", index.Index.as_view(), name="index"),
     path(
         "order/",
         include(
