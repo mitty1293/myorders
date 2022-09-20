@@ -8,13 +8,13 @@
         {{ field.label_tag }}
         {{ field }}
         {% if field.widget_type == "select" %}
-        <a href="{% url field.name|addstr:'_popup_update' field.value %}" class="bi-pencil-square popup_btn update_btn"></a>
-        <a href="{% url field.name|addstr:'_popup_create' %}" class="bi-plus-square popup_btn"></a>
-        <a href="{% url field.name|addstr:'_popup_delete' field.value %}" class="bi-x-square popup_btn delete_btn"></a>
+        <a href="{% url 'order_history:popup_update' field.name field.value %}" class="bi-pencil-square popup_btn update_btn"></a>
+        <a href="{% url 'order_history:popup_create' field.name %}" class="bi-plus-square popup_btn"></a>
+        <a href="{% url 'order_history:popup_delete' field.name field.value %}" class="bi-x-square popup_btn delete_btn"></a>
         {% endif %}
     </div>
     {% endfor %}
     <input type="submit" value="create">
 </form>
-<a href="{% url urlname_index %}">{{ page_title }}一覧に戻る</a>
+<a href="{% url 'order_history:index' model_name_lower %}">{{ page_title }}一覧に戻る</a>
 {% endblock content %}

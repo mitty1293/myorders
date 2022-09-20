@@ -3,7 +3,7 @@
 {% block content %}
 {% load custom_tags %}
 <h1>{{ page_title }}</h1>
-<a href="{% url urlname_create %}">{{ page_title }}を追加</a>
+<a href="{% url 'order_history:create' model_name_lower %}">{{ page_title }}を追加</a>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -19,7 +19,7 @@
             {% for key, value in object_dict.items %}
             {% if key != "_state" %}
             <td>
-                <a href="{% url urlname_update object.pk %}">{{ value }}</a>
+                <a href="{% url 'order_history:update' model_name_lower object.pk %}">{{ value }}</a>
             </td>
             {% endif %}
             {% endfor %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic import CreateView
+from django.views.generic import UpdateView
 from order_history.models import (
     Category,
     Manufacturer,
@@ -11,8 +11,8 @@ from order_history.models import (
 )
 
 
-class Create(CreateView):
-    template_name = "order_history/create.html"
+class Update(UpdateView):
+    template_name = "order_history/update.html"
     model_matrix = {
         "category": Category,
         "manufacturer": Manufacturer,
@@ -41,13 +41,13 @@ class Create(CreateView):
         )
 
 
-class PopupCreate(Create):
+class PopupUpdate(Update):
     def form_valid(self, form):
         _object = form.save()
         context = {
             "object_model": self.model_name_lower,
             "object_name": str(_object),
             "object_pk": _object.pk,
-            "function_name": "create_select_option",
+            "function_name": "update_select_option",
         }
         return render(self.request, "order_history/close.html", context)
