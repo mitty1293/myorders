@@ -2,6 +2,7 @@ from django.views.generic import ListView
 from order_history.models import (
     Category,
     Manufacturer,
+    OrderHistory,
     ProducingArea,
     Product,
     Unit,
@@ -18,6 +19,7 @@ class Index(ListView):
         "product": Product,
         "unit": Unit,
         "vendor": Vendor,
+        "order": OrderHistory,
     }
 
     def get_queryset(self):

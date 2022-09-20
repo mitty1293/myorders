@@ -4,6 +4,7 @@ from django.views.generic import CreateView
 from order_history.models import (
     Category,
     Manufacturer,
+    OrderHistory,
     ProducingArea,
     Product,
     Unit,
@@ -20,6 +21,7 @@ class Create(CreateView):
         "product": Product,
         "unit": Unit,
         "vendor": Vendor,
+        "order": OrderHistory,
     }
 
     def get_queryset(self):

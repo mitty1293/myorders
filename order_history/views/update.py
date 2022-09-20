@@ -4,6 +4,7 @@ from django.views.generic import UpdateView
 from order_history.models import (
     Category,
     Manufacturer,
+    OrderHistory,
     ProducingArea,
     Product,
     Unit,
@@ -20,6 +21,7 @@ class Update(UpdateView):
         "product": Product,
         "unit": Unit,
         "vendor": Vendor,
+        "order": OrderHistory,
     }
 
     def get_queryset(self):

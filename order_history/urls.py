@@ -1,18 +1,6 @@
 from django.urls import include, path
 
-from order_history.views import (
-    category,
-    create,
-    delete,
-    index,
-    manufacturer,
-    order,
-    producingarea,
-    product,
-    unit,
-    update,
-    vendor,
-)
+from order_history.views import create, delete, index, update
 
 app_name = "order_history"
 
@@ -40,16 +28,5 @@ urlpatterns = [
                 path("delete/<int:pk>", delete.Delete.as_view(), name="delete"),
             ]
         ),
-    ),
-    path(
-        "order/",
-        include(
-            [
-                path("", order.Index.as_view(), name="orderindex"),
-                path("create/", order.Create.as_view(), name="ordercreate"),
-                # path("update/<int:pk>", order.Update.as_view(), name="orderupdate"),
-                # path("delete/<int:pk>", order.Delete.as_view(), name="orderdelete"),
-            ]
-        ),
-    ),
+    )
 ]
