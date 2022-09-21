@@ -136,6 +136,14 @@ def get_or_create_undefined_producingarea():
     return producingarea
 
 
+def get_or_create_undefined_product():
+    """
+    Productモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
+    """
+    product, _ = Product.objects.get_or_create(id=1, name="未定義")
+    return product
+
+
 class Product(Common):
     name = models.CharField(
         db_column="name",
@@ -193,6 +201,7 @@ class OrderHistory(Common):
         db_column="product",
         verbose_name="商品",
         on_delete=models.CASCADE,
+        default=get_or_create_undefined_product,
     )
 
     quantity = models.DecimalField(
