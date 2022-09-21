@@ -8,22 +8,22 @@
     <thead>
         <tr>
             {% for row in header_row %}
-            <th>{{ row.verbose_name }}</th>
+                <th>{{ row.verbose_name }}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
         {% for object in object_list %}
-        {% get_vars object as object_dict %}
-        <tr>
-            {% for key, value in object_dict.items %}
-            {% if key != "_state" %}
-            <td>
-                <a href="{% url 'order_history:update' model_name_lower object.pk %}">{{ value }}</a>
-            </td>
-            {% endif %}
-            {% endfor %}
-        </tr>
+            {% get_vars object as object_dict %}
+            <tr>
+                {% for key, value in object_dict.items %}
+                    {% if key != "_state" %}
+                        <td>
+                            <a href="{% url 'order_history:update' model_name_lower object.pk %}">{{ value }}</a>
+                        </td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
         {% endfor %}
     </tbody>
 </table>
