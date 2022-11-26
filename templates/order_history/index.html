@@ -8,18 +8,21 @@
     <thead>
         <tr>
             {% for row in header_row %}
-                <th>{{ row.verbose_name }}</th>
+                <th>{{ row.verbose_name }}{% get_type row %}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
         {% for object in object_list %}
-            {% get_vars object as object_dict %}
             <tr>
-                {% for key, value in object_dict.items %}
+                {% for key, value in object.get_model_fields_name_value %}
                     {% if key != "_state" %}
                         <td>
                             <a href="{% url 'order_history:update' model_name_lower object.pk %}">{{ value }}</a>
+                            <br>{{ key }}
+                            <br>{% get_type object_list %}
+                            <br>{% get_type object %}
+                            <br>{{ object }}
                         </td>
                     {% endif %}
                 {% endfor %}
