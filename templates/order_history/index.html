@@ -19,10 +19,11 @@
                     {% if key != "_state" %}
                         <td>
                             <a href="{% url 'order_history:update' model_name_lower object.pk %}">{{ value }}</a>
-                            <br>{{ key }}
-                            <br>{% get_type object_list %}
-                            <br>{% get_type object %}
-                            <br>{{ object }}
+                            <br>value type: {% get_type value %}
+                            <br>key: {{ key }}
+                            <br>object_list type: {% get_type object_list %}
+                            <br>object: {{ object }}
+                            <br>object type: {% get_type object %}
                         </td>
                     {% endif %}
                 {% endfor %}

@@ -13,31 +13,27 @@ class Common(models.Model):
         )
         return reject_ManyToOneRel_fields
 
-    # 不要そうだったらメソッドごと消す
-    @classmethod
-    def get_model_fields_name(cls):
-        return [field.name for field in cls.get_model_fields()]
-
     @classmethod
     def get_class_name(cls):
         return cls.__name__
 
-    # @classmethod
-    # def get_model_fields_name_value(cls):
-    #     return [
-    #         (field.name, cls._meta.get_field(field.name))
-    #         for field in cls.get_model_fields()
-    #     ]
-
     def get_model_fields_name_value(self):
         return [
-            (field.name, field.value_to_string(self))
-            for field in self.get_model_fields()
+            (field.name, getattr(self, field.name)) for field in self.get_model_fields()
         ]
 
-    def get_values(self):
-        return [self.category for _name in self.get_model_fields_name()]
-        # return [cls[f"{_name}"] for _name in cls.get_model_fields_name()]
+    # @classmethod
+    # def get_model_fields_name(cls):
+    #     return [field.name for field in cls.get_model_fields()]
+
+    # def get_model_fields_name_value(self):
+    #     return [
+    #         (field.name, field.value_to_string(self))
+    #         for field in self.get_model_fields()
+    #     ]
+
+    # def dict_key_values(self):
+    #     return self.__dict__.items()
 
 
 class Category(Common):
