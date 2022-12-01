@@ -1,4 +1,8 @@
+import logging
+
 from django.db import models
+
+logger = logging.getLogger(__name__)
 
 
 class Common(models.Model):
@@ -8,32 +12,44 @@ class Common(models.Model):
     @classmethod
     def get_model_fields(cls):
         meta_fields = cls._meta.get_fields()
-        reject_ManyToOneRel_fields = (
-            x for x in meta_fields if not isinstance(x, models.ManyToOneRel)
-        )
+        reject_ManyToOneRel_fields = (x for x in meta_fields if not isinstance(x, models.ManyToOneRel))
         return reject_ManyToOneRel_fields
 
     @classmethod
     def get_class_name(cls):
         return cls.__name__
 
+    # all_key_valueが完成したら消す
     def get_model_fields_name_value(self):
-        return [
-            (field.name, getattr(self, field.name)) for field in self.get_model_fields()
-        ]
+        return [(field.name, getattr(self, field.name)) for field in self.get_model_fields()]
 
-    # @classmethod
-    # def get_model_fields_name(cls):
-    #     return [field.name for field in cls.get_model_fields()]
+    @classmethod
+    def all_key_value(cls):
+        object_element_list = []
 
-    # def get_model_fields_name_value(self):
-    #     return [
-    #         (field.name, field.value_to_string(self))
-    #         for field in self.get_model_fields()
-    #     ]
+        # PT1 -> foreignkeyは各モデルのオブジェクトが返ってくる.get_model_fields_name_valueと同じ出力であった.とりあえずの完成版.
+        # for object in cls.objects.all():
+        #     object_element = [(field.name, getattr(object, field.name)) for field in object.get_model_fields()]
+        #     object_element_list.append(object_element)
 
-    # def dict_key_values(self):
-    #     return self.__dict__.items()
+        # PT2 -> foreignkeyは各モデルのオブジェクトが返ってくる.get_model_fields_name_valueはタプルのリストだが、これは辞書のリスト.
+        # for object in cls.objects.all():
+        #     object_element = dict([(field.name, getattr(object, field.name)) for field in object.get_model_fields()])
+        #     object_element_list.append(object_element)
+
+        # PT3 -> PT2と同じものが返る.object_elementの定義が "キー:値" になってるので直感的にわかりやすいかも.
+        for object in cls.objects.all():
+            object_element = {field.name: getattr(object, field.name) for field in object.get_model_fields()}
+            object_element_list.append(object_element)
+
+        # PT3 -> foreignkeyはidしか返って来ない
+        # for object in cls.objects.all():
+        #     object_element_list.append(object.__dict__)
+
+        # PT4 -> foreignkeyはidしか返って来ない
+        # object_element_list = list(cls.objects.all().values())
+
+        return object_element_list
 
 
 class Category(Common):
