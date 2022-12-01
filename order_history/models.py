@@ -19,37 +19,36 @@ class Common(models.Model):
     def get_class_name(cls):
         return cls.__name__
 
-    # all_key_valueが完成したら消す
-    def get_model_fields_name_value(self):
-        return [(field.name, getattr(self, field.name)) for field in self.get_model_fields()]
-
     @classmethod
-    def all_key_value(cls):
-        object_element_list = []
+    def list_of_object_dict(cls):
+        """
+        Args:
+            aaa
 
-        # PT1 -> foreignkeyは各モデルのオブジェクトが返ってくる.get_model_fields_name_valueと同じ出力であった.とりあえずの完成版.
-        # for object in cls.objects.all():
-        #     object_element = [(field.name, getattr(object, field.name)) for field in object.get_model_fields()]
-        #     object_element_list.append(object_element)
+        Returns:
+            モデルオブジェクトの各フィールドと値を要素とする辞書のリスト.
+            例:
+                [
+                    {
+                        'id': 1,
+                        'name': 'milk',
+                        'category': <Category: Drink>,
+                        'unit': <Unit: ml>,
+                        'manufacturer': <Manufacturer: megmilk>,
+                    },
+                    {
+                        'id': 2,
+                        'name': 'Orange',
+                        ...
+                    },
+                ]
 
-        # PT2 -> foreignkeyは各モデルのオブジェクトが返ってくる.get_model_fields_name_valueはタプルのリストだが、これは辞書のリスト.
-        # for object in cls.objects.all():
-        #     object_element = dict([(field.name, getattr(object, field.name)) for field in object.get_model_fields()])
-        #     object_element_list.append(object_element)
-
-        # PT3 -> PT2と同じものが返る.object_elementの定義が "キー:値" になってるので直感的にわかりやすいかも.
+        """
+        list_of_model_obj_dict = []
         for object in cls.objects.all():
-            object_element = {field.name: getattr(object, field.name) for field in object.get_model_fields()}
-            object_element_list.append(object_element)
-
-        # PT3 -> foreignkeyはidしか返って来ない
-        # for object in cls.objects.all():
-        #     object_element_list.append(object.__dict__)
-
-        # PT4 -> foreignkeyはidしか返って来ない
-        # object_element_list = list(cls.objects.all().values())
-
-        return object_element_list
+            model_obj_dict = {field.name: getattr(object, field.name) for field in object.get_model_fields()}
+            list_of_model_obj_dict.append(model_obj_dict)
+        return list_of_model_obj_dict
 
 
 class Category(Common):
