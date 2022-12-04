@@ -1,3 +1,44 @@
+/* http: //colormind.io/bootstrap/ */
+/* F2F4F4, 9BA865, 818186, 909DA3, 3F505A */
+/* EFF0EB, 9EA69D, 766053, EB6D4B, 3A2929 */
+
+body {
+    background-color: #F2F4F4;
+    color: #3F505A;
+    font-family: "Raleway", "Aria", "Yu Gothic", sans-serif;
+}
+
+header {
+    background-color: #818186;
+    color: #F2F4F4;
+}
+
+navbar a {
+    text-decoration: none;
+    color: #F2F4F4;
+}
+
+navbar a:hover {
+    text-decoration: none;
+    color: inherit;
+    opacity: 0.5;
+}
+
+a.navbar-brand {
+    color: #909DA3;
+}
+
+main a {
+    text-decoration: none;
+    color: #3F505A;
+}
+
+main a:hover {
+    text-decoration: underline;
+    color: inherit;
+    opacity: 0.5;
+}
+
 .popup_btn {
     color: inherit;
     text-decoration: none;

@@ -21,9 +21,7 @@ class Common(models.Model):
 
     @classmethod
     def list_of_object_dict(cls):
-        """
-        Args:
-            aaa
+        """各モデルのフィールドと値を辞書で返す.
 
         Returns:
             モデルオブジェクトの各フィールドと値を要素とする辞書のリスト.
@@ -42,7 +40,6 @@ class Common(models.Model):
                         ...
                     },
                 ]
-
         """
         list_of_model_obj_dict = []
         for object in cls.objects.all():
@@ -54,7 +51,7 @@ class Common(models.Model):
 class Category(Common):
     name = models.CharField(
         db_column="name",
-        verbose_name="カテゴリ名",
+        verbose_name="カテゴリ",
         max_length=64,
     )
 
