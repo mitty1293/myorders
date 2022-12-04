@@ -7,23 +7,27 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            {% for row in header_row %}
-            <th>{{ row.verbose_name }}</th>
+            {% for row in table_header %}
+                {% if row.verbose_name != "ID" %}
+                <th>{{ row.verbose_name }}</th>
+                {% endif %}
             {% endfor %}
         </tr>
     </thead>
     <tbody>
-        {% for object in object_list %}
-        {% get_vars object as object_dict %}
-        <tr>
-            {% for key, value in object_dict.items %}
-            {% if key != "_state" %}
-            <td>
-                <a href="{% url 'order_history:update' model_name_lower object.pk %}">{{ value }}</a>
-            </td>
-            {% endif %}
-            {% endfor %}
-        </tr>
+        {% for row in table_data %}
+            <tr>
+                {% for key, value in row.items %}
+                    {% if key != "id" %}
+                    <td>
+                        {{ value }}
+                    </td>
+                    {% endif %}
+                {% endfor %}
+                    <td>
+                        <a href="{% url 'order_history:update' model_name_lower row.id %}" class="bi-pencil-square"></a>
+                    </td>
+            </tr>
         {% endfor %}
     </tbody>
 </table>

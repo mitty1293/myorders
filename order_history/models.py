@@ -1,4 +1,8 @@
+import logging
+
 from django.db import models
+
+logger = logging.getLogger(__name__)
 
 
 class Common(models.Model):
@@ -8,20 +12,46 @@ class Common(models.Model):
     @classmethod
     def get_model_fields(cls):
         meta_fields = cls._meta.get_fields()
-        reject_ManyToOneRel_fields = (
-            x for x in meta_fields if not isinstance(x, models.ManyToOneRel)
-        )
+        reject_ManyToOneRel_fields = (x for x in meta_fields if not isinstance(x, models.ManyToOneRel))
         return reject_ManyToOneRel_fields
 
     @classmethod
     def get_class_name(cls):
         return cls.__name__
 
+    @classmethod
+    def list_of_object_dict(cls):
+        """各モデルのフィールドと値を辞書で返す.
+
+        Returns:
+            モデルオブジェクトの各フィールドと値を要素とする辞書のリスト.
+            例:
+                [
+                    {
+                        'id': 1,
+                        'name': 'milk',
+                        'category': <Category: Drink>,
+                        'unit': <Unit: ml>,
+                        'manufacturer': <Manufacturer: megmilk>,
+                    },
+                    {
+                        'id': 2,
+                        'name': 'Orange',
+                        ...
+                    },
+                ]
+        """
+        list_of_model_obj_dict = []
+        for object in cls.objects.all():
+            model_obj_dict = {field.name: getattr(object, field.name) for field in object.get_model_fields()}
+            list_of_model_obj_dict.append(model_obj_dict)
+        return list_of_model_obj_dict
+
 
 class Category(Common):
     name = models.CharField(
         db_column="name",
-        verbose_name="カテゴリ名",
+        verbose_name="カテゴリ",
         max_length=64,
     )
 
