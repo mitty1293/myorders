@@ -1,0 +1,6 @@
+.python-version
+migrations/
+logs/*
+.venv/
+__pycache__/
+db.sqlite3

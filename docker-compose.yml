@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    image: myorders_app_dev
+    container_name: myorders_app_dev
+    depends_on:
+      - database_manager
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app/myorders
+    tty: true
+    networks:
+      - net
+  database_manager:
+    image: adminer:4.8.1-standalone
+    container_name: myorders_db_manager
+    environment:
+      - ADMINER_DEFAULT_SERVER=myorders_app_dev
+      - TZ=Asia/Tokyo
+    ports:
+      - "8080:8080"
+    networks:
+      - net
+networks:
+  net:
+    driver: bridge
