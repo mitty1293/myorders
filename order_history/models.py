@@ -87,6 +87,7 @@ class Vendor(Common):
         db_column="location",
         verbose_name="場所",
         max_length=64,
+        default="",
     )
 
     class Meta:
@@ -126,52 +127,13 @@ class ProducingArea(Common):
         return self.name
 
 
-def get_or_create_undefined_category():
-    """
-    Categoryモデルに'未分類'が存在しなければ作成、存在すれば'未分類'を返す
-    """
-    category, _ = Category.objects.get_or_create(id=1, name="未分類")
-    return category
-
-
-def get_or_create_undefined_unit():
-    """
-    Unitモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
-    """
-    unit, _ = Unit.objects.get_or_create(id=1, name="未定義")
-    return unit
-
-
-def get_or_create_undefined_vendor():
-    """
-    Vendorモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
-    """
-    vendor, _ = Vendor.objects.get_or_create(id=1, name="未定義", location="未定義")
-    return vendor
-
-
-def get_or_create_undefined_manufacturer():
-    """
-    Manufacturerモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
-    """
-    manufacturer, _ = Manufacturer.objects.get_or_create(id=1, name="未定義")
-    return manufacturer
-
-
-def get_or_create_undefined_producingarea():
-    """
-    ProducingAreaモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
-    """
-    producingarea, _ = ProducingArea.objects.get_or_create(id=1, name="未定義")
-    return producingarea
-
-
-def get_or_create_undefined_product():
-    """
-    Productモデルに'未定義'が存在しなければ作成、存在すれば'未定義'を返す
-    """
-    product, _ = Product.objects.get_or_create(id=1, name="未定義")
-    return product
+def get_or_create_default(sender, **kwargs):
+    Category.objects.get_or_create(id=1, name="--")
+    Unit.objects.get_or_create(id=1, name="--")
+    Vendor.objects.get_or_create(id=1, name="--", location="--")
+    Manufacturer.objects.get_or_create(id=1, name="--")
+    ProducingArea.objects.get_or_create(id=1, name="--")
+    Product.objects.get_or_create(id=1, name="--")
 
 
 class Product(Common):
@@ -186,7 +148,7 @@ class Product(Common):
         db_column="category",
         verbose_name="カテゴリ",
         on_delete=models.SET_DEFAULT,
-        default=get_or_create_undefined_category,
+        default=1,
     )
 
     unit = models.ForeignKey(
@@ -194,7 +156,7 @@ class Product(Common):
         db_column="unit",
         verbose_name="単位",
         on_delete=models.SET_DEFAULT,
-        default=get_or_create_undefined_unit,
+        default=1,
     )
 
     manufacturer = models.ForeignKey(
@@ -202,7 +164,7 @@ class Product(Common):
         db_column="manufacturer",
         verbose_name="製造者",
         on_delete=models.SET_DEFAULT,
-        default=get_or_create_undefined_manufacturer,
+        default=1,
     )
 
     producingarea = models.ForeignKey(
@@ -210,7 +172,7 @@ class Product(Common):
         db_column="producingarea",
         verbose_name="生産地",
         on_delete=models.SET_DEFAULT,
-        default=get_or_create_undefined_producingarea,
+        default=1,
     )
 
     class Meta:
@@ -231,7 +193,7 @@ class OrderHistory(Common):
         db_column="product",
         verbose_name="商品",
         on_delete=models.CASCADE,
-        default=get_or_create_undefined_product,
+        default=1,
     )
 
     quantity = models.DecimalField(
@@ -251,7 +213,7 @@ class OrderHistory(Common):
         db_column="vendor",
         verbose_name="購入元",
         on_delete=models.SET_DEFAULT,
-        default=get_or_create_undefined_vendor,
+        default=1,
     )
 
     class Meta:
