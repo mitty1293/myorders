@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "order_history.apps.OrderHistoryConfig",
-    "accounts.apps.AccountsConfig",
     "django_extensions",
 ]
 
@@ -129,9 +128,7 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "default": {
-            "format": "%(asctime)s\t%(levelname)s\t%(filename)s\t%(module)s\tline:%(lineno)d\t%(message)s"
-        },
+        "default": {"format": "%(asctime)s\t%(levelname)s\t%(filename)s\t%(module)s\tline:%(lineno)d\t%(message)s"},
     },
     "handlers": {
         "file": {
