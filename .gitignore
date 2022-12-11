@@ -1,4 +1,4 @@
-settings_local.py
+.env
 .python-version
 migrations/
 logs/*
