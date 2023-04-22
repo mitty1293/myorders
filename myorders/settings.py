@@ -55,10 +55,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "order_history.apps.OrderHistoryConfig",
-    "django_extensions",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -158,3 +159,6 @@ LOGGING = {
         },
     },
 }
+
+if DEBUG:
+    INTERNAL_IPS = ["127.0.0.1"]
