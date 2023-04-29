@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load custom_tags %}
+<h2>Top</h2>
+<a href="{% url 'order_history:create' model_name_lower %}">{{ page_title }}を追加</a>
+{% regroup table_data|dictsortreversed:"purchase_date" by purchase_date as orders %}
+{% for order in orders %}
+    <ul class="list-group list-group-flush orders">
+        <li class="list-group-item purchase_date">
+            {{ order.grouper }}
+        </li>
+        {% for o in order.list %}
+            <li class="list-group-item">
+                {{ o.product.name }}
+                \{{ o.price }}
+                <a href="{% url 'order_history:update' model_name_lower o.id %}" class="bi-pencil-square"></a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+{% endblock content %}

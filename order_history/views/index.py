@@ -1,6 +1,7 @@
 from django.views.generic import ListView
 
-from order_history.models import Category, Manufacturer, OrderHistory, ProducingArea, Product, Unit, Vendor
+from order_history.models import (Category, Manufacturer, OrderHistory,
+                                  ProducingArea, Product, Unit, Vendor)
 
 
 class Index(ListView):
@@ -14,6 +15,10 @@ class Index(ListView):
         "vendor": Vendor,
         "order": OrderHistory,
     }
+
+    def get_template_names(self):
+        self.template_name = "order_history/top.html" if self.kwargs.get("model_name_lower") == "order" else "order_history/index.html"
+        return super().get_template_names()
 
     def get_queryset(self):
         self.model_name_lower = self.kwargs.get("model_name_lower")

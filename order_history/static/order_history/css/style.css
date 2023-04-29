@@ -49,3 +49,8 @@ main a:hover {
     color: inherit;
     opacity: 0.5;
 }
+
+.purchase_date {
+    color: #3F505A;
+    font-size: smaller;
+}
