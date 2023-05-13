@@ -54,3 +54,12 @@ main a:hover {
     color: #3F505A;
     font-size: smaller;
 }
+
+.top_product_name {
+    width: 8%;
+}
+
+.top_price {
+    width: 3%;
+    text-align: right;
+}
