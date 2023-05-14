@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: development
+      target: production
     image: myorders_app_dev
     container_name: myorders_app_dev
     depends_on:

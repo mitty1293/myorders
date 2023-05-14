@@ -20,20 +20,16 @@ RUN apt update \
     # for mysqlclient
     python3-dev \
     default-libmysqlclient-dev \
-    build-essential \
-    # for django-extensions graph_models
-    libgraphviz-dev \
-    graphviz \
-    pkg-config
+    build-essential
 RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="${POETRY_HOME}/bin:$PATH"
 # import project files
 WORKDIR ${APP_PATH}
 
 #
-# development
+# production
 #
-FROM initial as development
+FROM initial as production
 ARG APP_NAME
 ARG APP_PATH
 # install dependencies
@@ -41,4 +37,4 @@ WORKDIR ${APP_PATH}/${APP_NAME}
 COPY ./poetry.lock ./pyproject.toml ./
 RUN poetry install --no-interaction
 ENTRYPOINT [ "poetry", "run" ]
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "--config", "gunicorn.conf.py"]
